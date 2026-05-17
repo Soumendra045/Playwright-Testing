@@ -1,0 +1,37 @@
+from playwright.sync_api import Page, expect
+import time
+
+def test_UIChecks(page: Page):
+    # Hide display placeholder text box
+    page.goto("https://rahulshettyacademy.com/AutomationPractice/")
+    expect(page.get_by_placeholder('Hide/Show Example')).to_be_visible()
+    page.get_by_role('button', name='Hide').click()
+    expect(page.get_by_placeholder('Hide/Show Example')).to_be_hidden()    
+
+    # Alertbox confirmations
+    # page.get_by_placeholder('Enter Your Name').fill("soumendra")
+    page.on("dialog", lambda dialog: dialog.accept())
+    page.get_by_role('button', name='Confirm').click()
+    
+    # time.sleep(4)
+    page.locator("#mousehover").hover()
+    page.get_by_role("link", name="Top").click()
+
+    # framehandling
+    pageFrame = page.frame_locator("#courses-iframe")
+    pageFrame.get_by_role('link', name="All Access plan").click()
+    expect(pageFrame.locator("body")).to_contain_text("Happy Subscibers")
+
+
+# //?get price of rice
+    page.goto("https://rahulshettyacademy.com/seleniumPractise/#/offers")
+
+    for index in range(page.locator("th").count()):
+       if page.locator("th").nth(index).filter(has_text="Price").count() > 0:
+            priceColValue = index
+            print(f'Price coloumn value {priceColValue}')
+            break
+    riceRow = page.locator("tr").filter(has_text="Rice")
+    expect(riceRow.locator("td").nth(priceColValue)).to_have_text("37")
+        
+
