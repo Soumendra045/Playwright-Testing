@@ -24,7 +24,7 @@ RUN install -m 0755 -d /etc/apt/keyrings && \
     apt-get update && apt-get install -y docker-ce-cli
 
 # Install Python packages
-RUN pip3 install \
+RUN pip3 install --break-system-packages \
     pytest \
     playwright \
     pytest-playwright \
