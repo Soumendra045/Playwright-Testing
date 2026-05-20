@@ -2,6 +2,7 @@ FROM jenkins/jenkins:2.555.2-jdk21
 
 USER root
 
+
 # Install Python and utilities
 RUN apt-get update && apt-get install -y \
     python3 \
@@ -32,6 +33,11 @@ RUN pip3 install --break-system-packages \
     pytest-bdd \
     pytest-xdist \
     requests
+
+# install xvfb
+RUN apt-get update && apt-get install -y \
+    xvfb \
+    xauth
 
 # Install Playwright browsers
 RUN playwright install --with-deps
