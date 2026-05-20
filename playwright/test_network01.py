@@ -1,3 +1,4 @@
+import pytest
 from playwright.sync_api import Page
 
 def intercept_response(route):
@@ -5,6 +6,7 @@ def intercept_response(route):
         json = {"data":[],"message":"No Orders"}   
     )
 
+@pytest.mark.smoke
 def test_network01(page: Page):
     page.goto("https://rahulshettyacademy.com/client/",
                 wait_until="domcontentloaded",

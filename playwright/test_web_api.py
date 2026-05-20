@@ -9,7 +9,7 @@ def test_ete_web_api(playwright: Playwright):
                 wait_until="domcontentloaded",
                 timeout=60000)
     # Login
-    page.get_by_placeholder("email@example.com").fill("soumendra096@gmail.com")
+    page.get_by_placeholder("email@example.com").fill("rsoumendra15@gmail.com")
     page.get_by_placeholder("enter your passsword").fill("Silu@0045")
     page.get_by_role("button", name="Login").click()
     
@@ -21,6 +21,7 @@ def test_ete_web_api(playwright: Playwright):
 
     # Oredrhistory validation
     row = page.locator("tr").filter(has_text=orderId)
+    # expect(row).to_be_visible(timeout=60000)
     row.get_by_role("button", name="View").click()
 
     expect(page.locator(".tagline")).to_contain_text("Thank you for Shopping With Us")
