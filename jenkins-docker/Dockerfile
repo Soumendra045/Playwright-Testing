@@ -24,7 +24,7 @@ RUN install -m 0755 -d /etc/apt/keyrings && \
     apt-get update && apt-get install -y docker-ce-cli
 
 # Copy requirements file
-COPY requirements.txt /tmp/requirements.txt
+COPY ../requirements.txt /tmp/requirements.txt
 
 # Install Python packages
 RUN pip3 install -r /tmp/requirements.txt
